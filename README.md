@@ -1,3 +1,5 @@
+🔗 [**Informações**](./INFORMATIONS.MD)
+
 ## Installation
 
 ```bash
