@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  database:
+    image: mongo
+    ports:
+      - "5005:27017"
+    environment:
+      - POSTGRES_USER = docker
+      - POSTGRES_PASSWORD= ignite
+      - POSTGRES_DB= search_engine
+    restart: always
+  redis:
+    image: redis
+    container_name: redis_bull
+    ports:
+      - "3002:6379"
