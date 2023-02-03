@@ -6,11 +6,13 @@ import { CarSchema } from 'src/model/Search.Schema';
 
 import { CaptureSearchersModule } from '../capture-searchers/capture-searchers.module';
 import { CacheService } from 'src/services/Cache.service';
+import { CarModule } from '../car/car.module';
 
 @Module({
   imports: [
     MongooseModule.forFeature([{ name: 'Car', schema: CarSchema }]),
     CaptureSearchersModule,
+    CarModule,
   ],
   providers: [SearchService, CacheService],
   controllers: [SearchController],

@@ -7,6 +7,6 @@ import { WebsitesService } from './websites.service';
 @Module({
   imports: [],
   providers: [WebsitesService, MercadoLivreService, CacheService],
-  exports: [WebsitesService],
+  exports: [WebsitesService, MercadoLivreService],
 })
 export class WebSiteModule {}

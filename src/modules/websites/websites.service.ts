@@ -5,7 +5,7 @@ import { MercadoLivreService } from './services/MercadoLivre.service';
 export class WebsitesService {
   constructor(private mercadoLivreService: MercadoLivreService) {}
 
-  async loadAllWebSitesServices(value): Promise<any[]> {
+  async loadAllWebSitesServices(value: string): Promise<any[]> {
     try {
       const mercadolivre = await this.mercadoLivreService.load(value);
       return mercadolivre;
