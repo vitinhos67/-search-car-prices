@@ -6,7 +6,7 @@ export class SearchController {
   constructor(private readonly serviceSearch: SearchService) {}
 
   @Get()
-  async search(@Query() query: object): Promise<any[] | unknown> {
+  async search(@Query('q') query: string): Promise<any[] | unknown> {
     return await this.serviceSearch.search(query);
   }
 }

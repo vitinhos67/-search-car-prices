@@ -1,4 +1,4 @@
-import { BadGatewayException, Injectable } from '@nestjs/common';
+import { BadGatewayException, Injectable, Logger } from '@nestjs/common';
 import { WebSitesInterface } from 'src/interfaces/WebSites.interface';
 import { PuppeterConfigs } from 'src/class/Puppeter.class';
 
@@ -9,22 +9,24 @@ export class MercadoLivreService
   extends PuppeterConfigs
   implements WebSitesInterface
 {
+  logger = new Logger(MercadoLivreService.name);
+
   constructor(private cacheService: CacheService) {
     super();
   }
 
-  async load(value: string): Promise<any> {
+  async load(search: string): Promise<any> {
     try {
-      const uri = 'https://mercadolivre.com.br';
+      search = search.replace(' ', '-');
+
+      const uri = `https://lista.mercadolivre.com.br/veiculos/${search}`;
+
+      this.logger.log(`The vehicle ${search} is being researched`);
+
       await this.setConfigPuppeter({
         uri,
       });
 
-      const inputSearchID = '#cb1-edit';
-      await this.page.waitForSelector(inputSearchID);
-
-      await this.page.type(inputSearchID, value);
-      await this.page.keyboard.press('Enter');
       await this.page.waitForSelector('#root-app');
 
       const total_ad = await this.page.$eval(
@@ -34,27 +36,27 @@ export class MercadoLivreService
 
       const ad_href = await this.page.$$eval(
         'div.ui-search-result__image > a.ui-search-link',
-        (el) => el.map((value) => value.href),
+        (el) => el.map((search) => search.href),
       );
 
       const price = await this.page.$$eval(
         'div.ui-search-result__content-wrapper > div.ui-search-item__group--price',
-        (el) => el.map((value) => value.textContent.split(' ')[0]),
+        (el) => el.map((search) => search.textContent.split(' ')[0]),
       );
 
       const attributes = await this.page.$$eval(
         'div.ui-search-result__content-wrapper > div.ui-search-item__group--attributes',
-        (el) => el.map((value) => value.textContent),
+        (el) => el.map((search) => search.textContent),
       );
 
       const title = await this.page.$$eval(
         'div.ui-search-result__content-wrapper > div.ui-search-item__group--title',
-        (el) => el.map((value) => value.textContent),
+        (el) => el.map((search) => search.textContent),
       );
 
       const image_href = await this.page.$$eval(
         'div.slick-slide > img.ui-search-result-image__element',
-        (el) => el.map((value) => value.src),
+        (el) => el.map((search) => search.src),
       );
 
       const data = [];
@@ -63,15 +65,14 @@ export class MercadoLivreService
 
       for (let ad = 0; ad < scroll; ad++) {
         data.push({
-          ad_href: ad_href[ad],
+          href_annoncements: ad_href[ad],
           price: price[ad],
           attributes: attributes[ad],
           title: title[ad],
           image_href: image_href[ad],
+          provider: 'mercado_livre',
         });
       }
-
-      await this.cacheService.setSearch(value.split(' '), JSON.stringify(data));
 
       return data;
     } catch (error) {

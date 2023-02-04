@@ -14,10 +14,6 @@ export class SearchService {
 
   async search(query): Promise<CarInterface[] | unknown> {
     try {
-      let { search } = query;
-
-      search = search.replace('+', ' ');
-
       /**
        *  Validar se eu tenho os dados no banco de dados sobre os carros
        *
@@ -25,7 +21,7 @@ export class SearchService {
        *
        */
 
-      return await this.captureSearchers.addValueInQueue(search);
+      return await this.captureSearchers.addValueInQueue(query);
     } catch (error) {
       throw new BadGatewayException(error.message);
     }

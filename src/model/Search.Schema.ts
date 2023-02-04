@@ -5,7 +5,7 @@ export type CarDocument = HydratedDocument<Car>;
 
 @Schema()
 class Car {
-  @Prop({ type: String })
+  @Prop()
   search: string;
 
   @Prop()
@@ -16,9 +16,6 @@ class Car {
 
   @Prop()
   year: number;
-
-  @Prop()
-  color: string;
 }
 
 export const CarSchema = SchemaFactory.createForClass(Car);
