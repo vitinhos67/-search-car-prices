@@ -35,14 +35,22 @@ export class OLXService extends PuppeterConfigs implements WebSitesInterface {
         (el) => el.map((value) => value.href)
       );
 
+      const image = await this.page.$$eval(
+        'ul#ad-list > li.sc-1fcmfeb-2 > div.sc-12rk7z2-0 >  a.sc-12rk7z2-1 > div.sc-12rk7z2-2 > div.sc-1ion3fe-0 > div > div.sc-101cdir-0 > img',
+        (el) => el.map((value) => value.src)
+      );
+
       const data = [];
 
       for (let i = 0; i < titles.length; i++) {
         data.push({
           title: titles[i],
           ad_href: ad_href[i],
+          image: image[i],
         });
       }
+
+      return data;
     } catch (error) {
       throw new BadGatewayException(error.message);
     }

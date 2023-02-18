@@ -12,8 +12,11 @@ export class SearchService {
     private cacheService: CacheService
   ) {}
 
-  async search(query): Promise<CarInterface[] | unknown> {
+  async search(query: string): Promise<CarInterface[] | unknown> {
     try {
+      if (!query) {
+        throw new BadGatewayException('Error');
+      }
       /**
        *  Validar se eu tenho os dados no banco de dados sobre os carros
        *

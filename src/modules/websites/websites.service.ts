@@ -14,7 +14,7 @@ export class WebsitesService {
       /*  const mercadolivre = await this.mercadoLivreService.load(value); */
       const olx = await this.OLXService.load(value);
 
-      return;
+      return olx;
     } catch (error) {
       throw new BadGatewayException(error.message);
     }
