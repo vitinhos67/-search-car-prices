@@ -40,13 +40,19 @@ export class OLXService extends PuppeterConfigs implements WebSitesInterface {
         (el) => el.map((value) => value.src)
       );
 
+      const price = await this.page.$$eval(
+        'ul#ad-list > li.sc-1fcmfeb-2 > div.sc-12rk7z2-0 >  a.sc-12rk7z2-1 > div.sc-12rk7z2-2 > div.sc-12rk7z2-3 > div.sc-12rk7z2-4 div.sc-12rk7z2-5 > div.sc-12rk7z2-11 > div > div.sc-1kn4z61-0 div.sc-1kn4z61-1 > span',
+        (el) => el.map((value) => value.textContent)
+      );
+
       const data = [];
 
       for (let i = 0; i < titles.length; i++) {
         data.push({
           title: titles[i],
-          ad_href: ad_href[i],
-          image: image[i],
+          price: price[i],
+          href_annoncements: ad_href[i],
+          image_href: image[i],
         });
       }
 
