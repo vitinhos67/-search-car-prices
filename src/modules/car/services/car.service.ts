@@ -23,7 +23,6 @@ export class CarService {
     private readonly webSitesServices: WebsitesService,
   ) {}
 
-  @Cron('*/15 * * * * *')
   async FindInformationsAboutCars() {
     try {
       const findModel = await this.modelModel.findOne({
@@ -62,14 +61,17 @@ export class CarService {
     try {
       if (annoncements) {
         annoncements.forEach(async (element) => {
-          await this.announcementesModel.create({
+          const data: AnnoncementsInterface = {
             href_annoncements: element.href_annoncements,
             attributes: element.attributes,
             title: element.title,
             image_href: element.image_href,
             price: element.price,
             status: statusAD.ATIVO,
-          });
+            provider: element.provider,
+          };
+
+          await this.announcementesModel.create(data);
         });
       }
     } catch (error) {

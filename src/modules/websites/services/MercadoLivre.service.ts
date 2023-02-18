@@ -2,8 +2,6 @@ import { BadGatewayException, Injectable, Logger } from '@nestjs/common';
 import { WebSitesInterface } from 'src/interfaces/WebSites.interface';
 import { PuppeterConfigs } from 'src/class/Puppeter.class';
 
-import { CacheService } from 'src/services/Cache.service';
-
 @Injectable()
 export class MercadoLivreService
   extends PuppeterConfigs
@@ -11,19 +9,17 @@ export class MercadoLivreService
 {
   logger = new Logger(MercadoLivreService.name);
 
-  constructor(private cacheService: CacheService) {
+  constructor() {
     super();
   }
 
   async load(search: string): Promise<any> {
     try {
-      search = search.replace(' ', '-');
-
       const uri = `https://lista.mercadolivre.com.br/veiculos/${search}`;
 
       this.logger.log(`The vehicle ${search} is being researched`);
 
-      await this.setConfigPuppeter({
+      await this.setConfigPuppeeter({
         uri,
       });
 

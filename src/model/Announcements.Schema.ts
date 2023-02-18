@@ -29,7 +29,7 @@ class Annoncements {
   image_href: string;
 
   @Prop()
-  Provider: string;
+  provider: string;
 }
 
 export const AnnoncementsSchema = SchemaFactory.createForClass(Annoncements);

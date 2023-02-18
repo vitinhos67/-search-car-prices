@@ -1,3 +1,4 @@
+import { BadGatewayException } from '@nestjs/common';
 import puppeteer, { Browser, Page } from 'puppeteer';
 
 interface PuppeteerInterface {
@@ -17,12 +18,16 @@ export class PuppeterConfigs implements PuppeteerInterface {
     this.page;
   }
 
-  async setConfigPuppeter(setConfig: SetConfig): Promise<void> {
-    const { uri } = setConfig;
+  async setConfigPuppeeter(setConfig: SetConfig): Promise<void> {
+    try {
+      const { uri } = setConfig;
 
-    this.browser = await puppeteer.launch();
-    this.page = await this.browser.newPage();
+      this.browser = await puppeteer.launch();
+      this.page = await this.browser.newPage();
 
-    await this.page.goto(uri);
+      await this.page.goto(uri);
+    } catch (error) {
+      throw new BadGatewayException(error.message);
+    }
   }
 }
