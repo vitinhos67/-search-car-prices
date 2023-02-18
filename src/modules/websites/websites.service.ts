@@ -6,7 +6,7 @@ import { OLXService } from './services/OLX.service';
 export class WebsitesService {
   constructor(
     private mercadoLivreService: MercadoLivreService,
-    private OLXService: OLXService,
+    private OLXService: OLXService
   ) {}
 
   async loadAllWebSitesServices(value: string): Promise<any[] | void> {

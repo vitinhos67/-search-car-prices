@@ -9,7 +9,7 @@ import { CacheService } from 'src/services/Cache.service';
 export class SearchService {
   constructor(
     private captureSearchers: CaptureSearchersService,
-    private cacheService: CacheService,
+    private cacheService: CacheService
   ) {}
 
   async search(query): Promise<CarInterface[] | unknown> {

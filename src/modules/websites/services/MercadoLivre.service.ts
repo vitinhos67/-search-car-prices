@@ -27,32 +27,32 @@ export class MercadoLivreService
 
       const total_ad = await this.page.$eval(
         'span.ui-search-search-result__quantity-results',
-        (el) => Number.parseInt(el.textContent.split(' ')[0]),
+        (el) => Number.parseInt(el.textContent.split(' ')[0])
       );
 
       const ad_href = await this.page.$$eval(
         'div.ui-search-result__image > a.ui-search-link',
-        (el) => el.map((search) => search.href),
+        (el) => el.map((search) => search.href)
       );
 
       const price = await this.page.$$eval(
         'div.ui-search-result__content-wrapper > div.ui-search-item__group--price',
-        (el) => el.map((search) => search.textContent.split(' ')[0]),
+        (el) => el.map((search) => search.textContent.split(' ')[0])
       );
 
       const attributes = await this.page.$$eval(
         'div.ui-search-result__content-wrapper > div.ui-search-item__group--attributes',
-        (el) => el.map((search) => search.textContent),
+        (el) => el.map((search) => search.textContent)
       );
 
       const title = await this.page.$$eval(
         'div.ui-search-result__content-wrapper > div.ui-search-item__group--title',
-        (el) => el.map((search) => search.textContent),
+        (el) => el.map((search) => search.textContent)
       );
 
       const image_href = await this.page.$$eval(
         'div.slick-slide > img.ui-search-result-image__element',
-        (el) => el.map((search) => search.src),
+        (el) => el.map((search) => search.src)
       );
 
       const data = [];

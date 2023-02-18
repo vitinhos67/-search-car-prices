@@ -8,7 +8,7 @@ import { WebsitesService } from '../websites/websites.service';
 export class CaptureSearchersService {
   constructor(
     private webSitesServices: WebsitesService,
-    @InjectQueue('capture-searchers') private captureSearchers: Queue,
+    @InjectQueue('capture-searchers') private captureSearchers: Queue
   ) {}
 
   async addValueInQueue(value: string) {

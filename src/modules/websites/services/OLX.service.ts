@@ -27,12 +27,12 @@ export class OLXService extends PuppeterConfigs implements WebSitesInterface {
 
       const titles = await this.page.$$eval(
         'ul#ad-list > li.sc-1fcmfeb-2 > div.sc-12rk7z2-0 > a.sc-12rk7z2-1',
-        (el) => el.map((value) => value.title),
+        (el) => el.map((value) => value.title)
       );
 
       const ad_href = await this.page.$$eval(
         'ul#ad-list > li.sc-1fcmfeb-2 > div.sc-12rk7z2-0 > a.sc-12rk7z2-1',
-        (el) => el.map((value) => value.href),
+        (el) => el.map((value) => value.href)
       );
 
       const data = [];

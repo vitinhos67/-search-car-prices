@@ -20,7 +20,7 @@ export class CarService {
     @InjectModel('models') private readonly modelModel: Model<ModelInterface>,
     @InjectModel('announcements')
     private announcementesModel: Model<AnnoncementsInterface>,
-    private readonly webSitesServices: WebsitesService,
+    private readonly webSitesServices: WebsitesService
   ) {}
 
   async FindInformationsAboutCars() {
@@ -56,7 +56,7 @@ export class CarService {
   }
 
   async addAnnoncements(
-    annoncements: AnnoncementsInterface[] | void,
+    annoncements: AnnoncementsInterface[] | void
   ): Promise<void> {
     try {
       if (annoncements) {
@@ -87,7 +87,7 @@ export class CarService {
         },
         {
           visited: true,
-        },
+        }
       );
     } catch (error) {
       throw new BadGatewayException(error.message);

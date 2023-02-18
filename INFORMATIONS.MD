@@ -1,15 +1,17 @@
-O objetivo desta api e trazer informações sobre carros disponiveis para venda/compra na web, os sites que estão sendo buscada por carros entre eles são:
-
-mercadolivre,
-olx,
-webmotors
+### The proposal
 
 
-E como funciona?
+The purpose of this API is to bring information about cars available for sale/purchase on the web, the sites that are being searched for cars among them are:
+
+<ul>
+<li>Mercadolivre (Working) </li>
+<li>Olx (Working)</li>
+<li>Webmotors</li>
+</ul>
 
 
-No momento a API consegue pegar informações de carros especificos no mercado livre quando passamos uma query, com um tempo de resposta nao agradavel, então como solução...
+### How it works
 
+Is being created a background job for capture informations car, why?
 
-A api conterá um background-jobs que a cada momento ira chamar um web-crawler e para mapear informações de carros entre os sites listados, assim, contendo ja todos os carros armazenados será possivel obter respostas mais rapidas 
-
+For the informations have a response better.
