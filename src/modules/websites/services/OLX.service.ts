@@ -2,13 +2,12 @@ import { BadGatewayException, Injectable, Logger } from '@nestjs/common';
 import { WebSitesInterface } from 'src/interfaces/WebSites.interface';
 import { PuppeterConfigs } from 'src/class/Puppeter.class';
 import puppeteer from 'puppeteer';
-import { CacheService } from 'src/services/Cache.service';
 
 @Injectable()
 export class OLXService extends PuppeterConfigs implements WebSitesInterface {
   logger = new Logger(OLXService.name);
 
-  constructor(private cacheService: CacheService) {
+  constructor() {
     super();
   }
 
@@ -51,8 +50,10 @@ export class OLXService extends PuppeterConfigs implements WebSitesInterface {
         data.push({
           title: titles[i],
           price: price[i],
+          atributtes: '',
           href_annoncements: ad_href[i],
           image_href: image[i],
+          provider: 'olx',
         });
       }
 

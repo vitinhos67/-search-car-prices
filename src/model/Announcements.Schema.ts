@@ -15,10 +15,8 @@ class Annoncements {
   attributes: string;
 
   @Prop({
-    default: '',
+    default: 'ACTIVE',
   })
-  color: string;
-
   @Prop()
   status: string;
 
