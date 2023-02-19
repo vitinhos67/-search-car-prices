@@ -28,6 +28,9 @@ class Annoncements {
 
   @Prop()
   provider: string;
+
+  @Prop()
+  tags: [];
 }
 
 export const AnnoncementsSchema = SchemaFactory.createForClass(Annoncements);

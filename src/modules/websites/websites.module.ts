@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AnnoncementsSchema } from 'src/model/Announcements.Schema';
+
 import { CacheService } from 'src/services/Cache.service';
 
 import { MercadoLivreService } from './services/MercadoLivre.service';

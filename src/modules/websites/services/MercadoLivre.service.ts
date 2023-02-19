@@ -60,6 +60,7 @@ export class MercadoLivreService
       const scroll = total_ad < 48 ? total_ad : 48;
 
       for (let ad = 0; ad < scroll; ad++) {
+        const tokenize = title[ad].toLowerCase().split(' ');
         data.push({
           href_annoncements: ad_href[ad],
           price: price[ad],
@@ -67,6 +68,7 @@ export class MercadoLivreService
           title: title[ad],
           image_href: image_href[ad],
           provider: 'mercado_livre',
+          tags: [...tokenize],
         });
       }
 

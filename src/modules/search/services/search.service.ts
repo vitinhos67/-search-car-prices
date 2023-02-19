@@ -1,15 +1,13 @@
 import { BadGatewayException, Injectable } from '@nestjs/common';
-
 import { CaptureSearchersService } from 'src/modules/capture-searchers/capture-searchers.service';
-
 import { CarInterface } from '../../car/interface/car.interface';
-import { CacheService } from 'src/services/Cache.service';
+import { AnnoncementsService } from 'src/modules/annoncements/annoncements.service';
 
 @Injectable()
 export class SearchService {
   constructor(
-    private captureSearchers: CaptureSearchersService,
-    private cacheService: CacheService
+    private adService: AnnoncementsService,
+    private captureSearchers: CaptureSearchersService
   ) {}
 
   async search(query: string): Promise<CarInterface[] | unknown> {
@@ -17,12 +15,12 @@ export class SearchService {
       if (!query) {
         throw new BadGatewayException('Error');
       }
-      /**
-       *  Validar se eu tenho os dados no banco de dados sobre os carros
-       *
-       *  se nao adiciona na fila para reconhecer os dados
-       *
-       */
+
+      const response = await this.adService.findAd(query);
+
+      if (response.length) {
+        return response;
+      }
 
       return await this.captureSearchers.addValueInQueue(query);
     } catch (error) {

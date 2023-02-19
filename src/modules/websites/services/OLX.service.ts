@@ -47,6 +47,8 @@ export class OLXService extends PuppeterConfigs implements WebSitesInterface {
       const data = [];
 
       for (let i = 0; i < titles.length; i++) {
+        const tokenize = titles[i].toLowerCase().split(' ');
+
         data.push({
           title: titles[i],
           price: price[i],
@@ -54,6 +56,7 @@ export class OLXService extends PuppeterConfigs implements WebSitesInterface {
           href_annoncements: ad_href[i],
           image_href: image[i],
           provider: 'olx',
+          tags: [...tokenize],
         });
       }
 
