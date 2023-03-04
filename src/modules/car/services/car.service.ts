@@ -1,7 +1,7 @@
 // Retorna as pesquisas dos carros com o intuito de deletar, encontrar, atualizar, criar
 import { BadGatewayException, Injectable, Logger } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Cron, CronExpression } from '@nestjs/schedule';
+
 import { Model } from 'mongoose';
 import {
   AnnoncementsInterface,

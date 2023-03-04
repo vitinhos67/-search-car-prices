@@ -2,10 +2,10 @@ import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 
 import * as dotenv from 'dotenv';
-import { CaptureSearchersModule } from '../capture-searchers/capture-searchers.module';
-import { SearchModule } from '../search/search.module';
+import { CaptureSearchersModule } from './modules/capture-searchers/capture-searchers.module';
+import { SearchModule } from './modules/search/search.module';
 import { ScheduleModule } from '@nestjs/schedule';
-import { CarModule } from '../car/car.module';
+import { CarModule } from './modules/car/car.module';
 dotenv.config();
 
 @Module({
