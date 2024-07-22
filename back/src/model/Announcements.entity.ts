@@ -1,10 +1,16 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, DeleteDateColumn } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  CreateDateColumn,
+  UpdateDateColumn,
+  DeleteDateColumn,
+} from 'typeorm';
 
 @Entity({
-  name: 'annoncements'
+  name: 'annoncements',
 })
 export class AnnoncementsModel {
-
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -43,6 +49,4 @@ export class AnnoncementsModel {
 
   @DeleteDateColumn()
   deletedAt?: Date;
-
 }
-

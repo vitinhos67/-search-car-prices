@@ -7,7 +7,7 @@ import { CarBrandModel } from 'src/model/Brand.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
 @Module({
   imports: [
-    TypeOrmModule.forFeature([CarBrandModel,CarModelModel, AnnoncementsModel]),
+    TypeOrmModule.forFeature([CarBrandModel, CarModelModel, AnnoncementsModel]),
     WebSiteModule,
   ],
   providers: [CarService],

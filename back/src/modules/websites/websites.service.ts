@@ -8,8 +8,9 @@ import { AnnoncementsService } from '../annoncements/annoncements.service';
 @Injectable()
 export class WebsitesService {
   constructor(
-    @InjectRepository(AnnoncementsModel) private readonly adModel: Repository<AnnoncementsModel>,
-    private mercadoLivreService: MercadoLivreService,
+    @InjectRepository(AnnoncementsModel)
+    private readonly adModel: Repository<AnnoncementsModel>,
+    private mercadoLivreService: MercadoLivreService
   ) {}
 
   async loadAllWebSitesServices(value: string): Promise<any> {
@@ -27,7 +28,7 @@ export class WebsitesService {
 
   async saveAnnouncements(data: any[]): Promise<any> {
     try {
-      const preparedData = data.map(val => {
+      const preparedData = data.map((val) => {
         if (!val.href_announcements) {
           val.href_announcements = 'without_href';
         }
@@ -44,4 +45,3 @@ export class WebsitesService {
     }
   }
 }
-

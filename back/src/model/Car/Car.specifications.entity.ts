@@ -1,33 +1,41 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, OneToOne } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  CreateDateColumn,
+  UpdateDateColumn,
+  DeleteDateColumn,
+  OneToOne,
+} from 'typeorm';
 import { CarModel } from './Car.entity';
 
 @Entity({
-  name: 'car'
+  name: 'car',
 })
 export class CarSpecificationsModel {
   @PrimaryGeneratedColumn()
   id: string;
 
   @Column({
-    nullable: true
+    nullable: true,
   })
   engine: string;
 
   @Column({
-    nullable: true
+    nullable: true,
   })
   transmission: string;
 
   @Column({
-    nullable: true
+    nullable: true,
   })
   color: number;
   @Column({
-    nullable: true
+    nullable: true,
   })
   fuel_type: number;
   @Column({
-    nullable: true
+    nullable: true,
   })
   seats: number;
 
@@ -43,4 +51,3 @@ export class CarSpecificationsModel {
   @DeleteDateColumn()
   deletedAt?: Date;
 }
-

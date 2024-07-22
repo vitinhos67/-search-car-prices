@@ -62,12 +62,12 @@ export class MercadoLivreService
         data.push({
           href_annoncements: ad_href[ad] ?? null,
           price: price[ad] ?? null,
-          attributes: attributes[ad] ?? null ,
+          attributes: attributes[ad] ?? null,
           title: title[ad] ?? null,
           image_href: image_href[ad] ?? null,
           provider: 'mercado_livre',
           /* tags: [...tokenize], */
-          status: 'active'
+          status: 'active',
         });
       }
       return data;

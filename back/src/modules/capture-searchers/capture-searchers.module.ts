@@ -6,7 +6,6 @@ import { WebSiteModule } from '../websites/websites.module';
 import { config as dotenvConfig } from 'dotenv';
 dotenvConfig({ path: '.env' });
 
-
 @Module({
   imports: [
     WebSiteModule,

@@ -8,14 +8,10 @@ import { MercadoLivreService } from './services/MercadoLivre.service';
 import { OLXService } from './services/OLX.service';
 import { WebsitesService } from './websites.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { AnnoncementsService } from '../annoncements/annoncements.service';
 import { AnnoncementsModule } from '../annoncements/annoncements.module';
 
 @Module({
-  imports: [
-    TypeOrmModule.forFeature([AnnoncementsModel]),
-    AnnoncementsModule
-  ],
+  imports: [TypeOrmModule.forFeature([AnnoncementsModel]), AnnoncementsModule],
   providers: [WebsitesService, MercadoLivreService, OLXService, CacheService],
   exports: [WebsitesService, MercadoLivreService, OLXService],
 })

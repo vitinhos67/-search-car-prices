@@ -19,9 +19,12 @@ export class CarService {
   private readonly logger = new Logger(CarService.name);
 
   constructor(
-    @InjectRepository(CarBrandModel) private readonly brandsModel: Repository<CarBrandModel>,
-    @InjectRepository(CarModelModel) private readonly modelModel: Repository<CarModelModel>,
-    @InjectRepository(AnnoncementsModel) private readonly announcementesModel: Repository<AnnoncementsModel>,
+    @InjectRepository(CarBrandModel)
+    private readonly brandsModel: Repository<CarBrandModel>,
+    @InjectRepository(CarModelModel)
+    private readonly modelModel: Repository<CarModelModel>,
+    @InjectRepository(AnnoncementsModel)
+    private readonly announcementesModel: Repository<AnnoncementsModel>,
     private readonly webSitesServices: WebsitesService
   ) {}
 
@@ -30,12 +33,12 @@ export class CarService {
       const findModel = await this.modelModel.findOne({
         where: {
           visited: false,
-        }
+        },
       });
 
       const findBrand = await this.brandsModel.findOne({
         where: {
-          id : findModel.id_brand,
+          id: findModel.id_brand,
         },
       });
 
@@ -61,9 +64,7 @@ export class CarService {
     }
   }
 
-  async addAnnoncements(
-    annoncements: any
-  ): Promise<void> {
+  async addAnnoncements(annoncements: any): Promise<void> {
     try {
       if (annoncements) {
         annoncements.forEach(async (element) => {

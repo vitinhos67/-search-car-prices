@@ -1,16 +1,23 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, ManyToOne } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  CreateDateColumn,
+  UpdateDateColumn,
+  DeleteDateColumn,
+  ManyToOne,
+} from 'typeorm';
 import { AnnoncementsModel } from './Announcements.entity';
 
 @Entity({
-  name: 'tags'
+  name: 'tags',
 })
 export class TagsModel {
-
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
-  name: string
+  name: string;
 
   @ManyToOne(() => AnnoncementsModel, (annoncements) => annoncements.id)
   annoncements: AnnoncementsModel;
@@ -23,6 +30,4 @@ export class TagsModel {
 
   @DeleteDateColumn()
   deletedAt?: Date;
-
 }
-

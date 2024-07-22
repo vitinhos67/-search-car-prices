@@ -1,8 +1,16 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, ManyToOne } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  CreateDateColumn,
+  UpdateDateColumn,
+  DeleteDateColumn,
+  ManyToOne,
+} from 'typeorm';
 import { AnnoncementsModel } from './Announcements.entity';
 
 @Entity({
-  name: 'car_brand'
+  name: 'car_brand',
 })
 export class CarBrandModel {
   @PrimaryGeneratedColumn()
@@ -31,6 +39,4 @@ export class CarBrandModel {
 
   @DeleteDateColumn()
   deletedAt?: Date;
-
-
 }

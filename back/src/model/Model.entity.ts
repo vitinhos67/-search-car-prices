@@ -1,11 +1,16 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, DeleteDateColumn } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  CreateDateColumn,
+  UpdateDateColumn,
+  DeleteDateColumn,
+} from 'typeorm';
 
 @Entity({
-  name:'car_model'
+  name: 'car_model',
 })
 export class CarModelModel {
-
-
   @PrimaryGeneratedColumn()
   id: string;
 
