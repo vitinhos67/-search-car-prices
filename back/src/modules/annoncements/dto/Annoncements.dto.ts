@@ -1,6 +1,24 @@
-export class AnnoncementsDTO {
-  title: string;
-  price: string;
-  attributes: string;
-  href_annoncements: string;
+
+import { IsNotEmpty } from 'class-validator';
+
+export class AnnoncementsSpecficationsDTO {
+  @IsNotEmpty()
+  engine: string;
+  @IsNotEmpty()
+  color: string;
+  @IsNotEmpty()
+  fuel_type: string;
+  @IsNotEmpty()
+  seats: string;
+  @IsNotEmpty()
+  doors: number;
+}    
+
+export class AnnoncementsDTO extends AnnoncementsSpecficationsDTO {
+    @IsNotEmpty()
+    title: string;
+    @IsNotEmpty()
+    attributes: string;
+    @IsNotEmpty()
+    price: string;  
 }

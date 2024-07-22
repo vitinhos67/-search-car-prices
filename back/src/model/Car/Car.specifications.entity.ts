@@ -29,15 +29,20 @@ export class CarSpecificationsModel {
   @Column({
     nullable: true,
   })
-  color: number;
+  color: string;
   @Column({
     nullable: true,
   })
-  fuel_type: number;
+  fuel_type: string;
   @Column({
     nullable: true,
   })
-  seats: number;
+  seats: string;
+
+  @Column({
+    nullable: true,
+  })
+  doors: number;
 
   @OneToOne(() => CarModel, (car) => car.id)
   car: CarModel;

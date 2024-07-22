@@ -6,7 +6,7 @@ import { AnnoncementsDTO } from './dto/Annoncements.dto';
 export class AnnoncementsController {
   constructor(private readonly annoncementsService: AnnoncementsService) {}
 
-  @Get()
+  @Post()
   create(@Body() annoncements: AnnoncementsDTO): any {
     return this.annoncementsService.create(annoncements);
   }
