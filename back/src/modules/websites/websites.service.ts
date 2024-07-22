@@ -10,7 +10,6 @@ export class WebsitesService {
   constructor(
     @InjectRepository(AnnoncementsModel) private readonly adModel: Repository<AnnoncementsModel>,
     private mercadoLivreService: MercadoLivreService,
-    private annoucementService: AnnoncementsService
   ) {}
 
   async loadAllWebSitesServices(value: string): Promise<any> {
@@ -37,8 +36,6 @@ export class WebsitesService {
         }
         return val;
       });
-
-      console.log(preparedData);
 
       const result = await this.adModel.insert(preparedData);
       return result;

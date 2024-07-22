@@ -5,6 +5,7 @@ import { Model } from 'mongoose';
 import { AnnoncementsInterface } from 'src/interfaces/Annoucements.interface';
 import { AnnoncementsModel } from 'src/model/Announcements.entity';
 import { DataSource, Repository } from 'typeorm';
+import { AnnoncementsDTO } from './dto/Annoncements.dto';
 
 @Injectable()
 export class AnnoncementsService {
@@ -30,11 +31,9 @@ export class AnnoncementsService {
 
   async createMany(annoncements: AnnoncementsModel[]) {
     const queryRunner = this.dataSource.createQueryRunner();
-  
     await queryRunner.connect();
     await queryRunner.startTransaction();
     try {
-
       annoncements.forEach(async val => {
         await queryRunner.manager.save(val);
       })
@@ -46,6 +45,10 @@ export class AnnoncementsService {
 
       await queryRunner.release();
     }
+  }
+
+  async create(annoncements: AnnoncementsDTO) {
+
   }
 
 

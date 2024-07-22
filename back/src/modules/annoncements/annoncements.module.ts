@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { AnnoncementsModel } from 'src/model/Announcements.entity';
 import { AnnoncementsService } from './annoncements.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { AnnoncementsController } from './annoucements.controller';
 
 @Module({
   imports: [
@@ -9,5 +10,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
   ],
   providers: [AnnoncementsService],
   exports: [AnnoncementsService],
+  controllers: [AnnoncementsController]
 })
 export class AnnoncementsModule {}
