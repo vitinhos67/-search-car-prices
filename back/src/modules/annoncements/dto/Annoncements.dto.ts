@@ -9,7 +9,7 @@ export class AnnoncementsSpecficationsDTO {
   @IsNotEmpty()
   fuel_type: string;
   @IsNotEmpty()
-  seats: string;
+  seats: number;
   @IsNotEmpty()
   doors: number;
 }    

@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Query } from '@nestjs/common';
+import { Body, Controller, Get, Post, Query } from '@nestjs/common';
 import { AnnoncementsService } from 'src/modules/annoncements/annoncements.service';
 import { AnnoncementsDTO } from './dto/Annoncements.dto';
 
