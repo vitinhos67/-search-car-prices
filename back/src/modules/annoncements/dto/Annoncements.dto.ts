@@ -1,6 +1,7 @@
 
 import { IsNotEmpty } from 'class-validator';
 
+
 export class AnnoncementsSpecficationsDTO {
   @IsNotEmpty()
   engine: string;
@@ -20,5 +21,18 @@ export class AnnoncementsDTO extends AnnoncementsSpecficationsDTO {
     @IsNotEmpty()
     attributes: string;
     @IsNotEmpty()
-    price: string;  
+    price: string; 
+    @IsNotEmpty()
+    provider: Provider | External; 
+}
+
+
+export enum Provider {
+  LICENSED_STORE  = "licensed_store",
+  AMATUE = 'amatuer'
+}
+
+export  enum External {
+  MERCADO_LIVRE = 'mercado_livre',
+  OLX = 'olx'
 }

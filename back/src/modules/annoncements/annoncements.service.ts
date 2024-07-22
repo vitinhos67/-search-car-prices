@@ -1,7 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
 import { InjectRepository } from '@nestjs/typeorm';
-import { AnnoncementsInterface } from 'src/interfaces/Annoucements.interface';
 import { AnnoncementsModel } from 'src/model/Announcements.entity';
 import { DataSource, Repository } from 'typeorm';
 import { AnnoncementsDTO } from './dto/Annoncements.dto';
@@ -47,6 +45,6 @@ export class AnnoncementsService {
   }
 
   async create(annoncements: AnnoncementsDTO) {
-    return annoncements;
+    return this.adModel.save(annoncements);
   }
 }
