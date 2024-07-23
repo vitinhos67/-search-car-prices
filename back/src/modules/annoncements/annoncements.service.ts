@@ -1,15 +1,16 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { AnnoncementsModel } from 'src/model/Announcements.entity';
 import { DataSource, Repository } from 'typeorm';
 import { AnnoncementsDTO } from './dto/Annoncements.dto';
-import { AnnoncementsSpecificationsModel } from 'src/model/Car/Car.specifications.entity';
+import { AnnoncementsModel } from 'src/model/Announcements/Base/Announcements.entity';
+import { AnnoncementsSpecificationsModel } from 'src/model/Announcements/Announcements.specifications.entity';
 
 @Injectable()
 export class AnnoncementsService {
   constructor(
     @InjectRepository(AnnoncementsModel)
     private readonly adModel: Repository<AnnoncementsModel>,
+    @InjectRepository(AnnoncementsModel)
     private readonly adSpecificationsModel: Repository<AnnoncementsSpecificationsModel>,
     private dataSource: DataSource
   ) {}

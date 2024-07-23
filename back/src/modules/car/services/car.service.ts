@@ -8,7 +8,7 @@ import {
   AnnoncementsInterface,
   statusAD,
 } from 'src/interfaces/Annoucements.interface';
-import { AnnoncementsModel } from 'src/model/Announcements.entity';
+import { AnnoncementsModel } from 'src/model/Announcements/Base/Announcements.entity';
 import { CarBrandModel } from 'src/model/Brand.entity';
 import { CarModelModel } from 'src/model/Model.entity';
 import { WebsitesService } from 'src/modules/websites/websites.service';

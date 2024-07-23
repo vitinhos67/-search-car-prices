@@ -1,6 +1,4 @@
-import { InjectQueue } from '@nestjs/bull';
 import { Injectable } from '@nestjs/common';
-import { Queue } from 'bull';
 
 import { WebsitesService } from '../websites/websites.service';
 
