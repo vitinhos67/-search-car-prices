@@ -47,4 +47,32 @@ export class AnnoncementsService {
   async create(annoncements: AnnoncementsDTO) {
     return this.adModel.save(annoncements);
   }
+
+  async showById(id: number) {
+    try {
+      const data = await this.adModel.findOneBy({
+        id: id,
+      });
+      console.log(data);
+      if(!data) {
+        return {
+          success: false,
+          'error-codes': [
+            'not_result_found'
+          ]
+        }
+      }
+      return data;
+    } catch (error) {
+      if(error) {
+        return {
+          success: false,
+          'error-codes': [
+            'internal_server_error'
+          ],
+          message: error.getMessage()
+        }
+      } 
+    } 
+  }
 }

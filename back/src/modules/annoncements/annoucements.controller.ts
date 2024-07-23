@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Query } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { AnnoncementsService } from 'src/modules/annoncements/annoncements.service';
 import { AnnoncementsDTO } from './dto/Annoncements.dto';
 
@@ -9,5 +9,10 @@ export class AnnoncementsController {
   @Post()
   create(@Body() annoncements: AnnoncementsDTO): any {
     return this.annoncementsService.create(annoncements);
+  }
+
+  @Get(':id')
+  showById(@Param('id') id: number): any {
+    return this.annoncementsService.showById(id);
   }
 }
