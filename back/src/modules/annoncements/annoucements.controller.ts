@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { AnnoncementsService } from 'src/modules/annoncements/annoncements.service';
 import { AnnoncementsDTO } from './dto/Annoncements.dto';
 
@@ -14,5 +14,10 @@ export class AnnoncementsController {
   @Get(':id')
   showById(@Param('id') id: number): any {
     return this.annoncementsService.showById(id);
+  }
+
+  @Delete(':id')
+  deleteById(@Param('id') id: number): any {
+    return this.annoncementsService.deleteById(id);
   }
 }

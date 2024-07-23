@@ -100,4 +100,36 @@ export class AnnoncementsService {
       } 
     } 
   }
+
+  async deleteById(id: number) {
+    try {
+      const data = await this.adModel.findOneBy({
+        id: id,
+      });
+      if(!data) {
+        return {
+          success: false,
+          'error-codes': [
+            'not_result_found'
+          ]
+        }
+      }
+      const response = await this.adModel.softRemove(data);
+      return {
+        success: true,
+        data: response
+      };
+    } catch (error) {
+      if(error) {
+        return {
+          success: false,
+          'error-codes': [
+            'internal_server_error'
+          ],
+          message: error.getMessage()
+        }
+      } 
+    } 
+  }
+
 }
