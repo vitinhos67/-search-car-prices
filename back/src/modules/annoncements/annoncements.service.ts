@@ -39,13 +39,36 @@ export class AnnoncementsService {
       await queryRunner.commitTransaction();
     } catch (err) {
       await queryRunner.rollbackTransaction();
+      if(err) {
+        return {
+          success: false,
+          'error-codes': [
+            'internal_server_error'
+          ],
+          message: err.getMessage()
+        }
+      } 
     } finally {
       await queryRunner.release();
     }
   }
 
   async create(annoncements: AnnoncementsDTO) {
-    return this.adModel.save(annoncements);
+    try {
+      const data = await this.adModel.save(annoncements);
+      return {
+        success: true,
+        data: data
+      }
+    } catch(err) {
+      return {
+        success: false,
+        'error-codes': [
+          'internal_server_error'
+        ],
+        message: err.getMessage()
+      }
+    }
   }
 
   async showById(id: number) {
@@ -53,7 +76,6 @@ export class AnnoncementsService {
       const data = await this.adModel.findOneBy({
         id: id,
       });
-      console.log(data);
       if(!data) {
         return {
           success: false,
@@ -62,7 +84,10 @@ export class AnnoncementsService {
           ]
         }
       }
-      return data;
+      return {
+        success: true,
+        data: data
+      };
     } catch (error) {
       if(error) {
         return {
