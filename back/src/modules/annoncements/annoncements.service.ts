@@ -3,12 +3,14 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { AnnoncementsModel } from 'src/model/Announcements.entity';
 import { DataSource, Repository } from 'typeorm';
 import { AnnoncementsDTO } from './dto/Annoncements.dto';
+import { AnnoncementsSpecificationsModel } from 'src/model/Car/Car.specifications.entity';
 
 @Injectable()
 export class AnnoncementsService {
   constructor(
     @InjectRepository(AnnoncementsModel)
     private readonly adModel: Repository<AnnoncementsModel>,
+    private readonly adSpecificationsModel: Repository<AnnoncementsSpecificationsModel>,
     private dataSource: DataSource
   ) {}
 
@@ -55,18 +57,25 @@ export class AnnoncementsService {
 
   async create(annoncements: AnnoncementsDTO) {
     try {
-      const data = await this.adModel.save(annoncements);
+
+      const createdAnnouncement = this.adModel.create(annoncements);
+      const saved_ad = await this.adModel.save(createdAnnouncement);
+      const saved_ad_specifications = await this.adSpecificationsModel.create(annoncements);
+
+      delete saved_ad_specifications.id;
       return {
         success: true,
-        data: data
+        data: {
+          ...saved_ad,
+          ...saved_ad_specifications
+        }
       }
     } catch(err) {
       return {
         success: false,
         'error-codes': [
           'internal_server_error'
-        ],
-        message: err.getMessage()
+        ]
       }
     }
   }

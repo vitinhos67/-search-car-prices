@@ -7,7 +7,7 @@ import {
   DeleteDateColumn,
   ManyToOne,
 } from 'typeorm';
-import { AnnoncementsModel } from './Announcements.entity';
+import { AnnoncementsModel } from './Announcements/Base/Announcements.entity';
 
 @Entity({
   name: 'car_brand',

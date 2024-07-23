@@ -1,5 +1,5 @@
 
-import { IsNotEmpty } from 'class-validator';
+import { IsEmpty, IsNotEmpty } from 'class-validator';
 
 
 export class AnnoncementsSpecficationsDTO {
@@ -16,6 +16,7 @@ export class AnnoncementsSpecficationsDTO {
 }    
 
 export class AnnoncementsDTO extends AnnoncementsSpecficationsDTO {
+    id: number;
     @IsNotEmpty()
     title: string;
     @IsNotEmpty()

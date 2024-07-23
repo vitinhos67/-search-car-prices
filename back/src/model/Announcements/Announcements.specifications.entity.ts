@@ -7,14 +7,14 @@ import {
   DeleteDateColumn,
   OneToOne,
 } from 'typeorm';
-import { CarModel } from './Car.entity';
+import { AnnoncementsModel } from './Base/Announcements.entity';
 
 @Entity({
-  name: 'car',
+  name: 'annoncements_specifications',
 })
-export class CarSpecificationsModel {
+export class AnnoncementsSpecificationsModel {
   @PrimaryGeneratedColumn()
-  id: string;
+  id: number;
 
   @Column({
     nullable: true,
@@ -37,15 +37,15 @@ export class CarSpecificationsModel {
   @Column({
     nullable: true,
   })
-  seats: string;
+  seats: number;
 
   @Column({
     nullable: true,
   })
   doors: number;
 
-  @OneToOne(() => CarModel, (car) => car.id)
-  car: CarModel;
+  @OneToOne(() => AnnoncementsModel, (ad) => ad.id)
+  annoncements: AnnoncementsModel;
 
   @CreateDateColumn()
   created!: Date;
