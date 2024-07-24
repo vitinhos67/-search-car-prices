@@ -1,12 +1,12 @@
 import { Module } from '@nestjs/common';
-import { AnnoncementsModel } from 'src/model/Announcements/Base/Announcements.entity';
+import { Annoncements } from 'src/model/Announcements/Base/Announcements.entity';
 import { AnnoncementsService } from './annoncements.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AnnoncementsController } from './annoucements.controller';
-import { AnnoncementsSpecificationsModel } from 'src/model/Announcements/Announcements.specifications.entity';
+import { AnnoncementsSpecifications } from 'src/model/Announcements/Announcements.specifications.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([AnnoncementsModel, AnnoncementsSpecificationsModel])],
+  imports: [TypeOrmModule.forFeature([Annoncements, AnnoncementsSpecifications])],
   providers: [AnnoncementsService],
   exports: [AnnoncementsService],
   controllers: [AnnoncementsController],

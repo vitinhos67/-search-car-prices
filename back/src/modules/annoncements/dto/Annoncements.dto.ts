@@ -1,5 +1,5 @@
 
-import { IsEmpty, IsNotEmpty } from 'class-validator';
+import { IsEmpty, IsNotEmpty, IsNumber } from 'class-validator';
 
 
 export class AnnoncementsSpecficationsDTO {
@@ -12,19 +12,32 @@ export class AnnoncementsSpecficationsDTO {
   @IsNotEmpty()
   seats: number;
   @IsNotEmpty()
+  @IsNumber()
   doors: number;
+  @IsNotEmpty()
+  @IsNumber()
+  transmission: any;
+  Annoucement: AnnoncementsDTO;
+
 }    
 
-export class AnnoncementsDTO extends AnnoncementsSpecficationsDTO {
+export class AnnoncementsDTO {
     id: number;
     @IsNotEmpty()
     title: string;
     @IsNotEmpty()
     attributes: string;
     @IsNotEmpty()
-    price: string; 
+    price: string;
+    @IsNotEmpty()
+    status: string; 
     @IsNotEmpty()
     provider: Provider | External; 
+    @IsNotEmpty()
+    href_annoncements: string
+    @IsNotEmpty()
+    image_href: string
+
 }
 
 

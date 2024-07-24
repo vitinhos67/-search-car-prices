@@ -5,12 +5,16 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   DeleteDateColumn,
+  BaseEntity,
+  JoinColumn,
+  OneToOne,
 } from 'typeorm';
+import { AnnoncementsSpecifications } from '../Announcements.specifications.entity';
 
 @Entity({
   name: 'annoncements',
 })
-export class AnnoncementsModel {
+export class Annoncements {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -37,6 +41,9 @@ export class AnnoncementsModel {
     nullable: true,
   })
   image_href: string;
+
+  @OneToOne(() => AnnoncementsSpecifications, { cascade: true })
+  specifications: AnnoncementsSpecifications;
 
   @Column()
   provider: string;

@@ -1,17 +1,17 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { DataSource, Repository } from 'typeorm';
-import { AnnoncementsDTO } from './dto/Annoncements.dto';
-import { AnnoncementsModel } from 'src/model/Announcements/Base/Announcements.entity';
-import { AnnoncementsSpecificationsModel } from 'src/model/Announcements/Announcements.specifications.entity';
+import { DataSource, EntitySchema, EntityTarget, Repository } from 'typeorm';
+import { AnnoncementsDTO, AnnoncementsSpecficationsDTO } from './dto/Annoncements.dto';
+import { Annoncements } from 'src/model/Announcements/Base/Announcements.entity';
+import { AnnoncementsSpecifications } from 'src/model/Announcements/Announcements.specifications.entity';
 
 @Injectable()
 export class AnnoncementsService {
   constructor(
-    @InjectRepository(AnnoncementsModel)
-    private readonly adModel: Repository<AnnoncementsModel>,
-    @InjectRepository(AnnoncementsModel)
-    private readonly adSpecificationsModel: Repository<AnnoncementsSpecificationsModel>,
+    @InjectRepository(Annoncements)
+    private readonly adModel: Repository<Annoncements>,
+    @InjectRepository(AnnoncementsSpecifications)
+    private readonly adSpecificationsModel: Repository<AnnoncementsSpecifications>,
     private dataSource: DataSource
   ) {}
 
@@ -30,7 +30,7 @@ export class AnnoncementsService {
     }
   }
 
-  async createMany(annoncements: AnnoncementsModel[]) {
+  async createMany(annoncements: Annoncements[]) {
     const queryRunner = this.dataSource.createQueryRunner();
     await queryRunner.connect();
     await queryRunner.startTransaction();
@@ -47,8 +47,7 @@ export class AnnoncementsService {
           success: false,
           'error-codes': [
             'internal_server_error'
-          ],
-          message: err.getMessage()
+          ]
         }
       } 
     } finally {
@@ -56,22 +55,27 @@ export class AnnoncementsService {
     }
   }
 
-  async create(annoncements: AnnoncementsDTO) {
+  async create(annoncements: AnnoncementsDTO, annoncementsSpecfications: AnnoncementsSpecficationsDTO) {
     try {
-
-      const createdAnnouncement = this.adModel.create(annoncements);
-      const saved_ad = await this.adModel.save(createdAnnouncement);
-      const saved_ad_specifications = await this.adSpecificationsModel.create(annoncements);
-
-      delete saved_ad_specifications.id;
+    const createdAnnouncement = new Annoncements();
+    this.setAnnoncements(createdAnnouncement, annoncements);
+    await this.adModel.save(createdAnnouncement);
+    const createSpecifications = new AnnoncementsSpecifications();
+    this.setAnnoncementsSpecifications(createSpecifications, annoncementsSpecfications, createdAnnouncement);
+    await this.adSpecificationsModel.save(createSpecifications);
+      
+      delete createSpecifications.annoncements;
+      delete createSpecifications.deleted;
+      delete createdAnnouncement.deletedAt;
       return {
         success: true,
         data: {
-          ...saved_ad,
-          ...saved_ad_specifications
+          ...createdAnnouncement,
+          ...createSpecifications,
         }
       }
     } catch(err) {
+      console.log(err);
       return {
         success: false,
         'error-codes': [
@@ -79,6 +83,27 @@ export class AnnoncementsService {
         ]
       }
     }
+  }
+
+  private setAnnoncements(createdAnnouncement, annoncements) {
+    createdAnnouncement.title = annoncements.title;
+    createdAnnouncement.price = annoncements.price;
+    createdAnnouncement.attributes = annoncements.attributes;
+    createdAnnouncement.href_annoncements = annoncements.href_annoncements;
+    createdAnnouncement.image_href = annoncements.image_href;
+    createdAnnouncement.provider = annoncements.provider;
+    return createdAnnouncement;
+  }
+
+  private setAnnoncementsSpecifications(createSpecifications, val, annoncement) {
+    createSpecifications.engine = val.engine;
+    createSpecifications.transmission = val.transmission;
+    createSpecifications.color = val.color;
+    createSpecifications.fuel_type = val.fuel_type;
+    createSpecifications.seats = val.seats;
+    createSpecifications.doors = val.doors;
+    createSpecifications.annoncements = annoncement;
+    return createSpecifications;
   }
 
   async showById(id: number) {

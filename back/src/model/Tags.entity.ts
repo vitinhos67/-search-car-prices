@@ -7,7 +7,7 @@ import {
   DeleteDateColumn,
   ManyToOne,
 } from 'typeorm';
-import { AnnoncementsModel } from './Announcements/Base/Announcements.entity';
+import { Annoncements } from './Announcements/Base/Announcements.entity';
 
 @Entity({
   name: 'tags',
@@ -19,8 +19,8 @@ export class TagsModel {
   @Column()
   name: string;
 
-  @ManyToOne(() => AnnoncementsModel, (annoncements) => annoncements.id)
-  annoncements: AnnoncementsModel;
+  @ManyToOne(() => Annoncements, (annoncements) => annoncements.id)
+  annoncements: Annoncements;
 
   @CreateDateColumn()
   created!: Date;

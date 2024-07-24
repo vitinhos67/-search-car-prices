@@ -7,10 +7,10 @@ import { OLXService } from './services/OLX.service';
 import { WebsitesService } from './websites.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AnnoncementsModule } from '../annoncements/annoncements.module';
-import { AnnoncementsModel } from 'src/model/Announcements/Base/Announcements.entity';
+import { Annoncements } from 'src/model/Announcements/Base/Announcements.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([AnnoncementsModel]), AnnoncementsModule],
+  imports: [TypeOrmModule.forFeature([Annoncements]), AnnoncementsModule],
   providers: [WebsitesService, MercadoLivreService, OLXService, CacheService],
   exports: [WebsitesService, MercadoLivreService, OLXService],
 })

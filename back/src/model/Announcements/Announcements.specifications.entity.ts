@@ -6,13 +6,15 @@ import {
   UpdateDateColumn,
   DeleteDateColumn,
   OneToOne,
+  BaseEntity,
+  JoinColumn,
 } from 'typeorm';
-import { AnnoncementsModel } from './Base/Announcements.entity';
+import { Annoncements } from './Base/Announcements.entity';
 
 @Entity({
   name: 'annoncements_specifications',
 })
-export class AnnoncementsSpecificationsModel {
+export class AnnoncementsSpecifications {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -44,8 +46,9 @@ export class AnnoncementsSpecificationsModel {
   })
   doors: number;
 
-  @OneToOne(() => AnnoncementsModel, (ad) => ad.id)
-  annoncements: AnnoncementsModel;
+  @OneToOne(() => Annoncements, annoncement => annoncement.id)
+  @JoinColumn({ name: "annoncement_id" })
+  annoncements: Annoncements;
 
   @CreateDateColumn()
   created!: Date;
@@ -54,5 +57,5 @@ export class AnnoncementsSpecificationsModel {
   updated!: Date;
 
   @DeleteDateColumn()
-  deletedAt?: Date;
+  deleted?: Date;
 }

@@ -2,14 +2,14 @@ import { BadGatewayException, Injectable } from '@nestjs/common';
 import { MercadoLivreService } from './services/MercadoLivre.service';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { AnnoncementsModel } from 'src/model/Announcements/Base/Announcements.entity';
+import { Annoncements } from 'src/model/Announcements/Base/Announcements.entity';
 
 
 @Injectable()
 export class WebsitesService {
   constructor(
-    @InjectRepository(AnnoncementsModel)
-    private readonly adModel: Repository<AnnoncementsModel>,
+    @InjectRepository(Annoncements)
+    private readonly adModel: Repository<Annoncements>,
     private mercadoLivreService: MercadoLivreService
   ) {}
 
